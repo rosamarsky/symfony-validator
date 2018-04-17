@@ -1,0 +1,15 @@
+services:
+    validator.annotation_listener:
+        class: Rosamarsky\Validator\AnnotationListener
+        arguments:
+            - '@annotation_reader'
+            - '@validator.symfony_container'
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller }
+
+    Rosamarsky\Validator\Container: '@validator.symfony_container'
+
+    validator.symfony_container:
+        class: Rosamarsky\Validator\SymfonyContainer
+        arguments:
+            - '@service_container'
